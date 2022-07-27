@@ -1,7 +1,6 @@
 import express from "express";
 import {createRenderer} from "vue-server-renderer";
 import Vue from "vue";
-import HelloWorld from "./src/components/HelloWorld.vue";
 import generateHtml from "./src/services/generateHtml.js";
 
 const app = express();
@@ -15,7 +14,7 @@ app.get('*', (req, res) => {
         template: `<div>The requested url is {{url}}</div>`
     });
 
-    renderer.renderToString(HelloWorld, (err, html) => {
+    renderer.renderToString(test, (err, html) => {
         if (err) {
             return res.status(500).end('Internal Server Error');
         }
