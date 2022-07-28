@@ -1,20 +1,22 @@
-import express from "express";
-import {createRenderer} from "vue-server-renderer";
-import Vue from "vue";
-import generateHtml from "./src/services/generateHtml.js";
+const express =  require("express");
+const {createBundleRenderer} =  require("vue-server-renderer");
+const generateHtml =  require("./src/services/generateHtml.js");
 
-const app = express();
-const renderer = createRenderer();
+const server = express();
+const serverBundle = require('./dist/vue-ssr-server-bundle.json');
+const clientManifest = require('./dist/vue-ssr-client-manifest.json');
 
-app.get('*', (req, res) => {
-    const test = new Vue({
-        data: {
-            url: req.url
-        },
-        template: `<div>The requested url is {{url}}</div>`
-    });
+const renderer = createBundleRenderer(serverBundle, {
+    runInNewContext: false,
+    clientManifest
+});
 
-    renderer.renderToString(test, (err, html) => {
+server.use(express.static('dist'));
+
+server.get('*', (req, res) => {
+    const context = {url: 'lol'};
+
+    renderer.renderToString(context, (err, html) => {
         if (err) {
             return res.status(500).end('Internal Server Error');
         }
@@ -23,6 +25,6 @@ app.get('*', (req, res) => {
     });
 });
 
-app.listen(8080, () => {
+server.listen(8080, () => {
     console.log('Express listening at http://localhost:8080');
 });

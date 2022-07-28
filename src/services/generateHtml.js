@@ -1,11 +1,8 @@
 const generateHtml = (html) => {
     return `
-     <!DOCTYPE html>
-      <html lang="en">
-        <head><title>Hello</title></head>
-        <body>${html}</body>
-      </html>
+    ${html}
+    <script src="http://localhost:8080/client.js"></script>
     `
 }
 
-export default generateHtml;
+module.exports = generateHtml;
