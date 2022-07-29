@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <hello-world/>
-    <click-counter />
-    <product-list title="Testing" />
+    <click-counter title="Test Click Counter Component" />
+    <product-list title="Test Product List Component" />
   </div>
 </template>
 
