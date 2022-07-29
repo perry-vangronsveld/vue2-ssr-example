@@ -14,9 +14,7 @@ const renderer = createBundleRenderer(serverBundle, {
 server.use(express.static('dist'));
 
 server.get('*', (req, res) => {
-    const context = {url: 'lol'};
-
-    renderer.renderToString(context, (err, html) => {
+    renderer.renderToString( (err, html) => {
         if (err) {
             return res.status(500).end('Internal Server Error');
         }
